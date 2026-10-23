@@ -1,0 +1,872 @@
+/* =========================================
+   IMPORTS & CSS VARIABLES (Black, White, Red Theme)
+   ========================================= */
+
+/* Import Google Fonts for the page */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --mcv-black: #050505; /* Deep black for main backgrounds */
+  --mcv-dark: #111111; /* Slightly lighter black for cards/sections */
+  --mcv-red: #E60000; /* Primary brand red for accents and CTAs */
+  --mcv-red-light: #FF1A1A; /* Lighter red for hover states */
+  --mcv-red-subtle: rgba(230, 0, 0, 0.1); /* Very subtle red for badge backgrounds */
+  --mcv-white: #FFFFFF; /* Pure white for primary text */
+  --mcv-muted: #A0A0A0; /* Muted gray for secondary text */
+  --mcv-border: rgba(255, 255, 255, 0.1); /* Subtle white border for cards */
+}
+
+/* =========================================
+   PAGE ROOT
+   ========================================= */
+
+.mcv-page {
+  background-color: var(--mcv-black); /* Sets the entire page background to deep black */
+  color: var(--mcv-white); /* Sets default text color to white */
+  font-family: 'Inter', sans-serif; /* Sets the default font to Inter */
+  overflow-x: hidden; /* Prevents horizontal scroll from animations */
+}
+
+/* =========================================
+   HERO SECTION
+   ========================================= */
+
+.mcv-hero {
+  position: relative; /* Establishes positioning context for the overlay */
+  width: 100%; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  background-image: url('https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=1600&h=900&fit=crop'); /* Studio background photo */
+  background-size: cover; /* Scales the image to cover the entire section */
+  background-position: center; /* Centers the background image */
+  display: flex; /* Uses flexbox to center the overlay content */
+  align-items: center; /* Centers content vertically */
+  justify-content: center; /* Centers content horizontally */
+}
+
+.mcv-hero-overlay {
+  position: absolute; /* Covers the entire hero section */
+  top: 0; /* Aligns to the top */
+  left: 0; /* Aligns to the left */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background: rgba(0, 0, 0, 0.75); /* Darker semi-transparent overlay for better text readability */
+  display: flex; /* Uses flexbox to center children */
+  flex-direction: column; /* Stacks children vertically */
+  align-items: center; /* Centers children horizontally */
+  justify-content: center; /* Centers children vertically */
+  text-align: center; /* Centers text within each child */
+  padding: 2rem; /* Adds padding for small screens */
+}
+
+/* =========================================
+   ANIMATED HERO TITLE (Letter-by-Letter)
+   ========================================= */
+
+.mcv-hero-title {
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat for the title */
+  font-size: 5.5rem; /* Very large font size for impact */
+  font-weight: 900; /* Extra black weight for boldness */
+  letter-spacing: 0.2em; /* Wide letter spacing for a cinematic feel */
+  margin: 0 0 1.5rem 0; /* No top margin, 1.5rem bottom margin */
+  display: flex; /* Uses flexbox so each letter is a flex item */
+  justify-content: center; /* Centers the letters horizontally */
+  flex-wrap: wrap; /* Allows title to wrap on very small screens */
+}
+
+.mcv-hero-letter {
+  display: inline-block; /* Allows transform and animation on each letter */
+  opacity: 0; /* Starts invisible */
+  transform: translateY(60px) scale(0.8); /* Starts shifted down and slightly smaller */
+  filter: blur(10px); /* Starts blurred for a cinematic reveal */
+  animation: letterReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* Plays the reveal animation and stays at end state */
+  color: var(--mcv-white); /* White text color */
+  text-shadow: 0 0 40px rgba(230, 0, 0, 0.4); /* Subtle RED glow behind each letter */
+}
+
+/* Keyframes for the letter reveal animation */
+@keyframes letterReveal {
+  0% {
+    opacity: 0; /* Fully invisible at the start */
+    transform: translateY(60px) scale(0.8); /* Shifted down and smaller */
+    filter: blur(10px); /* Blurred */
+  }
+  100% {
+    opacity: 1; /* Fully visible at the end */
+    transform: translateY(0) scale(1); /* Back to original position and size */
+    filter: blur(0); /* No blur, sharp and clear */
+  }
+}
+
+/* =========================================
+   HERO SUBTITLE & CTA
+   ========================================= */
+
+.mcv-hero-subtitle {
+  font-family: 'Inter', sans-serif; /* Uses Inter for the subtitle */
+  font-size: 1.2rem; /* Comfortable subtitle size */
+  font-weight: 300; /* Light weight for elegance */
+  color: var(--mcv-red); /* RED color to stand out and match branding */
+  letter-spacing: 0.4em; /* Very wide spacing for a premium feel */
+  text-transform: uppercase; /* Forces uppercase */
+  margin: 0 0 2.5rem 0; /* Bottom margin before the button */
+  opacity: 0; /* Starts invisible */
+  transform: translateY(20px); /* Starts shifted down */
+  transition: all 1s ease 1s; /* Fades in after a 1s delay (after title finishes) */
+}
+
+.mcv-hero-subtitle--visible {
+  opacity: 1; /* Becomes fully visible */
+  transform: translateY(0); /* Moves to original position */
+}
+
+.mcv-hero-cta {
+  display: inline-block; /* Allows padding and sizing like a block element */
+  padding: 1rem 3rem; /* Generous padding for a prominent button */
+  background: transparent; /* No background by default */
+  color: var(--mcv-red); /* RED text color */
+  border: 2px solid var(--mcv-red); /* RED border */
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat for the button */
+  font-size: 0.9rem; /* Slightly small, refined font size */
+  font-weight: 700; /* Bold weight */
+  letter-spacing: 0.2em; /* Wide letter spacing */
+  text-transform: uppercase; /* Forces uppercase */
+  text-decoration: none; /* Removes default link underline */
+  cursor: pointer; /* Shows pointer cursor on hover */
+  opacity: 0; /* Starts invisible */
+  transform: translateY(20px); /* Starts shifted down */
+  transition: all 0.8s ease 1.4s; /* Fades in after 1.4s delay (after subtitle) */
+}
+
+.mcv-hero-cta--visible {
+  opacity: 1; /* Becomes fully visible */
+  transform: translateY(0); /* Moves to original position */
+}
+
+.mcv-hero-cta:hover {
+  background: var(--mcv-red); /* Fills with RED on hover */
+  color: var(--mcv-white); /* Changes text to white for contrast */
+  box-shadow: 0 0 30px rgba(230, 0, 0, 0.5); /* Adds a RED glow effect */
+}
+
+/* =========================================
+   SECTION SHARED STYLES
+   ========================================= */
+
+.mcv-section-badge {
+  display: inline-block; /* Allows padding while staying inline */
+  padding: 0.4rem 1.2rem; /* Inner spacing */
+  background: var(--mcv-red-subtle); /* Very subtle RED background */
+  color: var(--mcv-red); /* RED text color */
+  font-family: 'Inter', sans-serif; /* Uses Inter */
+  font-weight: 600; /* Semi-bold */
+  font-size: 0.8rem; /* Small font size */
+  border-radius: 50px; /* Pill-shaped border radius */
+  text-transform: uppercase; /* Forces uppercase */
+  letter-spacing: 2px; /* Wide letter spacing */
+  margin-bottom: 1rem; /* Space below the badge */
+}
+
+.mcv-section-title {
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 2.8rem; /* Large heading size */
+  font-weight: 800; /* Extra bold */
+  color: var(--mcv-white); /* White text */
+  margin: 0 0 1.5rem 0; /* Bottom margin only */
+}
+
+/* =========================================
+   ABOUT SECTION
+   ========================================= */
+
+.mcv-about {
+  padding: 6rem 2rem; /* Generous vertical padding, horizontal padding for small screens */
+  text-align: center; /* Centers all text */
+  background-color: var(--mcv-dark); /* Slightly lighter black background to separate sections */
+}
+
+.mcv-about-inner {
+  max-width: 750px; /* Limits the text width for readability */
+  margin: 0 auto; /* Centers the inner container */
+}
+
+.mcv-about-text {
+  font-size: 1.15rem; /* Comfortable reading size */
+  line-height: 1.8; /* Generous line height for readability */
+  color: var(--mcv-muted); /* Muted gray color */
+  margin: 0; /* Removes default margin */
+}
+
+/* =========================================
+   GALLERY SECTION (OUR WORK)
+   ========================================= */
+
+.mcv-gallery {
+  padding: 6rem 2rem; /* Generous padding */
+  text-align: center; /* Centers headings */
+  background-color: var(--mcv-black); /* Deep black background */
+}
+
+.mcv-gallery-grid {
+  display: grid; /* Uses CSS Grid */
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns on desktop */
+  gap: 1.5rem; /* Space between images */
+  max-width: 1200px; /* Limits grid width */
+  margin: 3rem auto 0 auto; /* Centers and adds top margin */
+}
+
+.mcv-gallery-item {
+  position: relative; /* Establishes context for the hover overlay */
+  border-radius: 12px; /* Rounded corners */
+  overflow: hidden; /* Clips the image and overlay to the rounded corners */
+  aspect-ratio: 3 / 2; /* Maintains a 3:2 aspect ratio */
+  cursor: pointer; /* Shows pointer cursor */
+}
+
+.mcv-gallery-img {
+  width: 100%; /* Fills the container width */
+  height: 100%; /* Fills the container height */
+  object-fit: cover; /* Crops the image to fill without stretching */
+  transition: transform 0.5s ease; /* Smooth zoom on hover */
+}
+
+.mcv-gallery-item:hover .mcv-gallery-img {
+  transform: scale(1.08); /* Zooms the image in slightly on hover */
+}
+
+.mcv-gallery-overlay {
+  position: absolute; /* Covers the entire gallery item */
+  top: 0; /* Aligns to top */
+  left: 0; /* Aligns to left */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+  display: flex; /* Uses flexbox to center the label */
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  opacity: 0; /* Starts invisible */
+  transition: opacity 0.4s ease; /* Smooth fade-in on hover */
+}
+
+.mcv-gallery-item:hover .mcv-gallery-overlay {
+  opacity: 1; /* Becomes visible on hover */
+}
+
+.mcv-gallery-category {
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 1rem; /* Standard size */
+  font-weight: 700; /* Bold */
+  color: var(--mcv-red); /* RED text to pop against the dark overlay */
+  letter-spacing: 0.15em; /* Slight letter spacing */
+  text-transform: uppercase; /* Forces uppercase */
+}
+
+/* =========================================
+   PRICING SECTION (OUR RATES)
+   ========================================= */
+
+.mcv-pricing {
+  padding: 6rem 2rem; /* Generous padding */
+  text-align: center; /* Centers headings */
+  background-color: var(--mcv-dark); /* Slightly lighter black background */
+}
+
+.mcv-pricing-subtitle {
+  font-size: 1.1rem; /* Comfortable reading size */
+  color: var(--mcv-muted); /* Muted gray */
+  max-width: 550px; /* Limits width */
+  margin: 0 auto 3rem auto; /* Centers and adds bottom margin */
+}
+
+.mcv-pricing-grid {
+  display: grid; /* Uses CSS Grid */
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns on desktop */
+  gap: 2rem; /* Space between cards */
+  max-width: 1100px; /* Limits grid width */
+  margin: 0 auto; /* Centers the grid */
+  align-items: start; /* Aligns cards to the top */
+}
+
+.mcv-pricing-card {
+  background: var(--mcv-black); /* Deep black card background */
+  border: 1px solid var(--mcv-border); /* Subtle white border */
+  border-radius: 20px; /* Large rounded corners */
+  padding: 3rem 2rem; /* Generous inner spacing */
+  text-align: center; /* Centers content */
+  position: relative; /* For positioning the "popular" badge */
+  transition: all 0.4s ease; /* Smooth hover transitions */
+}
+
+.mcv-pricing-card:hover {
+  transform: translateY(-5px); /* Lifts the card on hover */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); /* Deep shadow */
+  border-color: rgba(255, 255, 255, 0.2); /* Slightly brighter border on hover */
+}
+
+.mcv-pricing-card--popular {
+  border-color: var(--mcv-red); /* RED border for the popular card */
+  transform: scale(1.05); /* Slightly larger than the other cards */
+  box-shadow: 0 20px 50px rgba(230, 0, 0, 0.15); /* RED-tinted shadow */
+}
+
+.mcv-pricing-card--popular:hover {
+  transform: scale(1.05) translateY(-5px); /* Maintains scale while lifting */
+}
+
+.mcv-popular-badge {
+  position: absolute; /* Positioned relative to the card */
+  top: -14px; /* Sits above the card */
+  left: 50%; /* Centers horizontally */
+  transform: translateX(-50%); /* Offsets by half its width for true centering */
+  background: var(--mcv-red); /* RED background */
+  color: var(--mcv-white); /* White text for contrast */
+  padding: 0.4rem 1.5rem; /* Inner spacing */
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 0.75rem; /* Small font size */
+  font-weight: 700; /* Bold */
+  border-radius: 50px; /* Pill shape */
+  text-transform: uppercase; /* Forces uppercase */
+  letter-spacing: 1px; /* Letter spacing */
+}
+
+.mcv-pricing-name {
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 1.2rem; /* Medium size */
+  font-weight: 600; /* Semi-bold */
+  color: var(--mcv-muted); /* Muted gray */
+  text-transform: uppercase; /* Forces uppercase */
+  letter-spacing: 2px; /* Wide spacing */
+  margin: 0 0 1.5rem 0; /* Bottom margin */
+}
+
+.mcv-pricing-amount {
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 3.5rem; /* Very large price display */
+  font-weight: 900; /* Extra black weight */
+  color: var(--mcv-white); /* White text */
+  margin-bottom: 0.5rem; /* Small bottom margin */
+}
+
+.mcv-pricing-duration {
+  font-size: 0.95rem; /* Small size */
+  color: var(--mcv-red); /* RED color */
+  font-weight: 500; /* Medium weight */
+  margin-bottom: 2rem; /* Space before the features list */
+}
+
+.mcv-pricing-features {
+  list-style: none; /* Removes default bullet points */
+  padding: 0; /* Removes default padding */
+  margin: 0 0 2.5rem 0; /* Bottom margin before button */
+  text-align: left; /* Left-aligns the feature items */
+}
+
+.mcv-pricing-feature {
+  padding: 0.6rem 0; /* Vertical padding for each feature */
+  font-size: 0.95rem; /* Comfortable reading size */
+  color: var(--mcv-muted); /* Muted gray text */
+  border-bottom: 1px solid var(--mcv-border); /* Subtle separator line */
+  display: flex; /* Uses flexbox to align checkmark and text */
+  align-items: center; /* Centers items vertically */
+  gap: 0.75rem; /* Space between checkmark and text */
+}
+
+.mcv-check {
+  color: var(--mcv-red); /* RED checkmark */
+  font-weight: 700; /* Bold checkmark */
+  font-size: 1rem; /* Standard size */
+}
+
+.mcv-pricing-btn {
+  display: inline-block; /* Allows padding and sizing */
+  padding: 0.9rem 2.5rem; /* Button padding */
+  background: transparent; /* No background by default */
+  color: var(--mcv-red); /* RED text */
+  border: 2px solid var(--mcv-red); /* RED border */
+  border-radius: 50px; /* Pill shape */
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 0.85rem; /* Slightly small */
+  font-weight: 700; /* Bold */
+  letter-spacing: 0.15em; /* Letter spacing */
+  text-transform: uppercase; /* Forces uppercase */
+  text-decoration: none; /* Removes underline */
+  cursor: pointer; /* Pointer cursor */
+  transition: all 0.3s ease; /* Smooth hover transitions */
+}
+
+.mcv-pricing-btn:hover {
+  background: var(--mcv-red); /* Fills with RED on hover */
+  color: var(--mcv-white); /* White text for contrast */
+}
+
+.mcv-pricing-card--popular .mcv-pricing-btn {
+  background: var(--mcv-red); /* Popular card button is filled by default */
+  color: var(--mcv-white); /* White text */
+}
+
+.mcv-pricing-card--popular .mcv-pricing-btn:hover {
+  background: var(--mcv-red-light); /* Lighter RED on hover */
+  box-shadow: 0 0 25px rgba(230, 0, 0, 0.5); /* RED glow */
+}
+
+/* =========================================
+   CONTACT / CTA SECTION
+   ========================================= */
+
+.mcv-contact {
+  padding: 6rem 2rem; /* Generous padding */
+  text-align: center; /* Centers all content */
+  background: linear-gradient(135deg, var(--mcv-black) 0%, #1a0000 100%); /* Diagonal gradient from black to very dark red */
+}
+
+.mcv-contact-title {
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 2.5rem; /* Large heading */
+  font-weight: 800; /* Extra bold */
+  color: var(--mcv-white); /* White text */
+  margin: 0 0 1rem 0; /* Bottom margin */
+}
+
+.mcv-contact-text {
+  font-size: 1.1rem; /* Comfortable reading size */
+  color: var(--mcv-muted); /* Muted gray */
+  margin: 0 0 2.5rem 0; /* Bottom margin before button */
+}
+
+.mcv-contact-btn {
+  display: inline-block; /* Allows padding and sizing */
+  padding: 1.1rem 3.5rem; /* Generous button padding */
+  background: var(--mcv-red); /* RED background */
+  color: var(--mcv-white); /* White text for contrast */
+  border: none; /* No border */
+  border-radius: 50px; /* Pill shape */
+  font-family: 'Montserrat', sans-serif; /* Uses Montserrat */
+  font-size: 0.95rem; /* Standard size */
+  font-weight: 700; /* Bold */
+  letter-spacing: 0.15em; /* Letter spacing */
+  text-transform: uppercase; /* Forces uppercase */
+  text-decoration: none; /* Removes underline */
+  cursor: pointer; /* Pointer cursor */
+  transition: all 0.3s ease; /* Smooth hover transitions */
+}
+
+.mcv-contact-btn:hover {
+  background: var(--mcv-red-light); /* Lighter RED on hover */
+  box-shadow: 0 10px 30px rgba(230, 0, 0, 0.5); /* RED glow shadow */
+  transform: translateY(-3px); /* Slight lift on hover */
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+/* Tablets and small laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .mcv-hero-title { 
+    font-size: 4rem; /* Reduces hero title size */
+    letter-spacing: 0.15em; /* Tightens spacing slightly */
+  }
+  .mcv-gallery-grid { 
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for gallery */
+  }
+  .mcv-pricing-grid { 
+    grid-template-columns: 1fr; /* 1 column for pricing to make cards readable */
+    max-width: 450px; /* Limits width so cards don't stretch too wide */
+  }
+  .mcv-pricing-card--popular { 
+    transform: scale(1); /* Removes the scale-up on popular card for better mobile flow */
+  }
+  .mcv-pricing-card--popular:hover { 
+    transform: translateY(-5px); /* Only lifts on hover */
+  }
+}
+
+/* Tablets and large phones (max-width: 768px) */
+@media (max-width: 768px) {
+  .mcv-hero-title { 
+    font-size: 3rem; /* Smaller title */
+    letter-spacing: 0.1em; /* Tighter spacing */
+  }
+  .mcv-hero-subtitle { 
+    font-size: 1rem; /* Smaller subtitle */
+    letter-spacing: 0.2em; /* Tighter spacing */
+  }
+  .mcv-section-title { 
+    font-size: 2rem; /* Smaller section headings */
+  }
+  .mcv-gallery-grid { 
+    grid-template-columns: 1fr; /* 1 column for gallery on smaller tablets */
+    max-width: 500px; /* Limits width */
+  }
+}
+
+/* Small phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .mcv-hero-title { 
+    font-size: 2.2rem; /* Smallest title size */
+    letter-spacing: 0.05em; /* Minimal spacing to fit on screen */
+  }
+  .mcv-hero-subtitle { 
+    font-size: 0.85rem; /* Smallest subtitle */
+    letter-spacing: 0.15em; 
+  }
+  .mcv-hero-cta {
+    padding: 0.8rem 2rem; /* Smaller button padding */
+    font-size: 0.8rem; /* Smaller button text */
+  }
+  .mcv-section-title { 
+    font-size: 1.6rem; /* Smallest section headings */
+  }
+  .mcv-pricing-amount { 
+    font-size: 2.8rem; /* Smaller price display */
+  }
+  .mcv-contact-title {
+    font-size: 1.8rem; /* Smaller contact heading */
+  }
+}
+
+/* =========================================
+   PRICING CATEGORY TAGS (Links Rates to Gallery)
+   ========================================= */
+
+.mcv-pricing-categories {
+  display: flex; /* Uses flexbox to align tags side-by-side */
+  justify-content: center; /* Centers the tags horizontally */
+  gap: 0.5rem; /* Space between each tag */
+  margin-bottom: 1.5rem; /* Space below the tags before the price */
+  flex-wrap: wrap; /* Allows tags to wrap on very small screens */
+}
+
+.mcv-pricing-category-tag {
+  font-family: 'Inter', sans-serif; /* Uses Inter font */
+  font-size: 0.7rem; /* Small, refined font size */
+  font-weight: 600; /* Semi-bold */
+  color: var(--mcv-white); /* White text */
+  background: rgba(255, 255, 255, 0.1); /* Subtle white background */
+  padding: 0.3rem 0.8rem; /* Inner spacing */
+  border-radius: 4px; /* Slight rounded corners */
+  text-transform: uppercase; /* Forces uppercase */
+  letter-spacing: 1px; /* Wide letter spacing for readability */
+}
+
+/* Special styling for the tags inside the "Most Popular" card */
+.mcv-pricing-card--popular .mcv-pricing-category-tag {
+  background: rgba(230, 0, 0, 0.15); /* Subtle red background */
+  color: var(--mcv-red-light); /* Light red text */
+  border: 1px solid rgba(230, 0, 0, 0.3); /* Subtle red border */
+}
+/* =========================================
+   PRICING LOADING & ERROR STATES
+   ========================================= */
+
+.mcv-pricing-loading,
+.mcv-pricing-error {
+  display: flex; /* Uses flexbox to center content */
+  flex-direction: column; /* Stacks spinner/text vertically */
+  align-items: center; /* Centers horizontally */
+  justify-content: center; /* Centers vertically */
+  padding: 4rem 2rem; /* Generous padding */
+  color: var(--mcv-muted); /* Muted gray text */
+  font-size: 1.1rem; /* Comfortable reading size */
+}
+
+.mcv-loading-spinner {
+  width: 40px; /* Spinner width */
+  height: 40px; /* Spinner height */
+  border: 4px solid var(--mcv-border); /* Light border */
+  border-top: 4px solid var(--mcv-red); /* Red spinning part */
+  border-radius: 50%; /* Makes it a circle */
+  animation: spin 1s linear infinite; /* Spins continuously */
+  margin-bottom: 1rem; /* Space below spinner */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); } /* Start at 0 degrees */
+  100% { transform: rotate(360deg); } /* End at 360 degrees */
+}
+
+.mcv-retry-btn {
+  margin-top: 1rem; /* Space above button */
+  padding: 0.6rem 1.5rem; /* Button padding */
+  background: var(--mcv-red); /* Red background */
+  color: var(--mcv-white); /* White text */
+  border: none; /* No border */
+  border-radius: 50px; /* Pill shape */
+  font-family: 'Montserrat', sans-serif; /* Montserrat font */
+  font-weight: 600; /* Semi-bold */
+  cursor: pointer; /* Pointer cursor */
+  transition: background 0.3s ease; /* Smooth hover transition */
+}
+
+.mcv-retry-btn:hover {
+  background: var(--mcv-red-light); /* Lighter red on hover */
+}
+
+
+/* =========================================
+   MULTI-STEP FORM & AI ESTIMATOR STYLES
+   ========================================= */
+.mcv-contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mcv-form-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.mcv-step {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: #1e1e1e;
+  transition: all 0.3s ease;
+}
+
+.mcv-step.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.mcv-step-line {
+  width: 40px;
+  height: 2px;
+  background: #333;
+  margin: 0 0.5rem;
+}
+
+/* AI Estimator Card */
+.mcv-ai-estimator-card {
+  background: linear-gradient(145deg, #141414, #1a1a1a);
+  border: 1px solid #3b82f6;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+}
+
+.mcv-ai-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.mcv-ai-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.mcv-ai-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .mcv-ai-form-grid { grid-template-columns: 1fr; }
+}
+
+.mcv-ai-extras {
+  margin-bottom: 2rem;
+}
+
+.mcv-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.mcv-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.mcv-checkbox input {
+  accent-color: #3b82f6;
+  width: 18px;
+  height: 18px;
+}
+
+.mcv-ai-calculate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mcv-ai-calculate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.mcv-ai-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid #3b82f6;
+  border-radius: 12px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.mcv-ai-result h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.mcv-highlight {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.mcv-ai-breakdown {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.mcv-ai-apply-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.mcv-ai-apply-btn:hover {
+  background: #16a34a;
+}
+
+/* Form Actions */
+.mcv-form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mcv-back-btn {
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.mcv-back-btn:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Payment Card */
+.mcv-payment-card {
+  background: #141414;
+  border: 1px solid #22c55e;
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.mcv-success-icon-large {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.mcv-payment-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .mcv-payment-methods { grid-template-columns: 1fr; }
+}
+
+.mcv-payment-option {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+.mcv-payment-option.mpesa { border-top: 3px solid #22c55e; }
+.mcv-payment-option.bank { border-top: 3px solid #3b82f6; }
+
+.mcv-payment-logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.mcv-payment-option.mpesa .mcv-payment-logo { color: #22c55e; }
+.mcv-payment-option.bank .mcv-payment-logo { color: #3b82f6; }
+
+.mcv-payment-option p {
+  margin: 0.5rem 0;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.mcv-payment-note {
+  font-size: 0.85rem !important;
+  color: #888 !important;
+  font-style: italic;
+  margin-top: 1rem !important;
+}
+
+.mcv-payment-actions {
+  margin-top: 2rem;
+}
+
+.mcv-payment-disclaimer {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.mcv-confirm-payment-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+  transition: background 0.3s;
+  margin-bottom: 1rem;
+}
+
+.mcv-confirm-payment-btn:hover {
+  background: #16a34a;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

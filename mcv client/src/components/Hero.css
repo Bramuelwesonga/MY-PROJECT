@@ -1,0 +1,200 @@
+/* =========================================
+   1. BASE LAYOUT & BACKGROUND
+   ========================================= */
+
+.hero-section {
+  position: relative; /* Allows child elements (like glows) to be positioned absolutely inside it */
+  min-height: 100vh; /* Makes the section take up at least 100% of the screen height */
+  display: flex; /* Uses Flexbox to center the inner container */
+  align-items: center; /* Centers content vertically */
+  justify-content: center; /* Centers content horizontally */
+  background-color: #ffffff; /* Clean white background */
+  overflow: hidden; /* Hides the background glows if they bleed outside the section */
+   /* CHANGE THIS LINE: Remove the 2rem side padding */
+  padding: 120px 0 4rem 0;  /* Top padding pushes content down so the fixed Header doesn't cover it */
+}
+
+.hero-container {
+  max-width: 100%; /* Prevents the content from getting too wide on huge monitors */
+  width: 100%;
+  display: grid; /* Uses CSS Grid for the 2-column layout */
+  grid-template-columns: 1fr 1fr; /* Creates two equal columns (1 fraction each) */
+  gap: 4rem; /* Adds space between the text and the images */
+  align-items: center; /* Vertically centers the columns */
+  z-index: 10; /* Keeps the text and images above the background glows */
+   /* ADD THESE TWO LINES: */
+  padding: 0 4rem; /* Adds 4rem of breathing room on the left and right sides */
+  box-sizing: border-box; /* Ensures the padding doesn't accidentally create a scrollbar */
+
+}
+
+/* =========================================
+   2. BACKGROUND GLOWS
+   ========================================= */
+
+.glow {
+  position: absolute; /* Takes the div out of normal flow so it sits in the background */
+  border-radius: 50%; /* Makes the square div a perfect circle */
+  filter: blur(100px); /* Heavily blurs the circle to create a soft "glow" effect */
+  opacity: 0.15; /* Makes it very faint (15% visible) so it doesn't distract from text */
+  z-index: 1; /* Puts it behind the text (which is z-index 10) */
+}
+
+.glow-red {
+  width: 400px; height: 400px; background: #990000; top: -100px; left: -100px;
+}
+
+.glow-blue {
+  width: 500px; height: 500px; background: #002868; bottom: -150px; right: -150px;
+}
+
+/* =========================================
+   3. TEXT STYLING & TYPOGRAPHY
+   ========================================= */
+
+.hero-text {
+  display: flex;
+  flex-direction: column; /* Stacks text elements vertically */
+  gap: 1.5rem; /* Adds space between the badge, title, paragraph, and buttons */
+}
+
+.badge {
+  display: inline-block; width: fit-content; /* Makes the background only as wide as the text */
+  padding: 0.4rem 1rem; background: rgba(153, 0, 0, 0.1); /* Faint red background */
+  color: #990000; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.85rem;
+  border-radius: 50px; /* Makes the ends perfectly rounded (pill shape) */
+  border: 1px solid rgba(153, 0, 0, 0.2); text-transform: uppercase; letter-spacing: 1px;
+}
+
+.hero-text h1 {
+  font-family: 'Montserrat', sans-serif; font-size: 4rem; font-weight: 800;
+  line-height: 1.1; color: #1a1a1a; margin: 0; /* Tight line-height makes the headline look punchy */
+}
+
+.highlight-red { color: #990000; } /* Colors the word "Vision" Red */
+.highlight-blue { color: #002868; } /* Colors the word "Life" Blue */
+
+.hero-text p {
+  font-family: 'Inter', sans-serif; font-size: 1.15rem; line-height: 1.7;
+  color: #555555; max-width: 90%; margin: 0; /* max-width prevents lines from getting too long to read */
+}
+
+/* =========================================
+   4. BUTTONS
+   ========================================= */
+
+.hero-buttons {
+  display: flex; gap: 1rem; margin-top: 1rem; /* Places buttons side-by-side */
+}
+
+.btn {
+  padding: 0.9rem 2rem; border-radius: 8px; font-family: 'Inter', sans-serif;
+  font-weight: 600; font-size: 1rem; text-decoration: none; text-align: center;
+  transition: all 0.3s ease; /* Smooths out ALL changes (color, movement, shadow) on hover */
+}
+
+.btn-primary {
+  background: #990000; color: #ffffff; border: 2px solid #990000;
+  box-shadow: 0 4px 15px rgba(153, 0, 0, 0.3); /* Adds a red glow under the button */
+}
+
+.btn-primary:hover {
+  background: #7a0000; border-color: #7a0000;
+  transform: translateY(-3px); /* Moves the button UP by 3 pixels */
+  box-shadow: 0 8px 25px rgba(153, 0, 0, 0.4); /* Makes the shadow larger to simulate lifting */
+}
+
+.btn-secondary {
+  background: transparent; color: #002868; border: 2px solid #002868;
+}
+
+.btn-secondary:hover {
+  background: #002868; color: #ffffff;
+  transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 40, 104, 0.2);
+}
+
+/* =========================================
+   5. IMAGE COLLAGE LAYOUT
+   ========================================= */
+
+.hero-visuals {
+  position: relative; /* REQUIRED: Allows the child images to be positioned absolutely inside this box */
+  height: 500px; /* Gives the container a fixed height to work within */
+  display: flex; align-items: center; justify-content: center;
+}
+
+.img-wrapper {
+  position: absolute; /* Allows images to overlap each other */
+  border-radius: 20px; /* Rounds the corners of the image frame */
+  overflow: hidden; /* Ensures the image doesn't poke out of the rounded corners */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* Adds a deep, realistic drop shadow */
+  border: 4px solid #ffffff; /* Adds a thick white border around the image */
+}
+
+.img-wrapper img {
+  width: 100%; height: 100%; object-fit: cover; display: block; 
+  /* object-fit: cover zooms the image to fill the box without stretching it */
+}
+
+.main-img { width: 320px; height: 400px; z-index: 2; } /* z-index 2 puts it behind the small images */
+.small-img-1 { width: 200px; height: 200px; top: 20px; right: 0; z-index: 3; } /* Pinned to top-right, sits on top */
+.small-img-2 { width: 220px; height: 220px; bottom: 0; left: 0; z-index: 3; } /* Pinned to bottom-left, sits on top */
+
+/* =========================================
+   6. ANIMATIONS (THE MAGIC)
+   ========================================= */
+
+/* 1. Text Fade-Up Animation */
+.fade-up {
+  opacity: 0; /* Starts invisible */
+  transform: translateY(30px); /* Starts shifted down by 30 pixels */
+  animation: fadeUpAnim 0.8s ease-out forwards; /* Runs the animation defined below */
+}
+
+@keyframes fadeUpAnim {
+  to { opacity: 1; transform: translateY(0); } /* Ends fully visible and in its normal position */
+}
+
+/* Staggered Delays: Makes elements appear one after another */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+.delay-4 { animation-delay: 0.7s; }
+
+/* 2. Image Floating Animation */
+.float-1 { animation: floatAnim 6s ease-in-out infinite; } /* Takes 6 seconds to complete one loop, runs forever */
+.float-2 { animation: floatAnim 5s ease-in-out infinite 1s; } /* Takes 5 seconds, but waits 1 second before starting */
+.float-3 { animation: floatAnim 7s ease-in-out infinite 2s; } /* Takes 7 seconds, waits 2 seconds */
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); } /* At the start and end, it's in normal position */
+  50% { transform: translateY(-20px); } /* Halfway through, it moves UP 20 pixels */
+}
+
+/* =========================================
+   7. MOBILE RESPONSIVENESS
+   ========================================= */
+
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr; /* Changes from 2 columns to 1 column (stacked) */
+    text-align: center; /* Centers the text on mobile */
+    gap: 3rem;
+  }
+
+  .hero-text { align-items: center; } /* Centers the badge and buttons */
+  .hero-text h1 { font-size: 3rem; } /* Makes the headline smaller */
+  .hero-text p { max-width: 100%; } /* Allows paragraph to use full width */
+  
+  /* Shrinks the images so they fit on smaller screens */
+  .hero-visuals { height: 400px; }
+  .main-img { width: 260px; height: 320px; }
+  .small-img-1 { width: 160px; height: 160px; }
+  .small-img-2 { width: 180px; height: 180px; }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 { font-size: 2.2rem; } /* Even smaller headline for phones */
+  .hero-buttons { flex-direction: column; width: 100%; } /* Stacks buttons vertically */
+  .btn { width: 100%; } /* Makes buttons full-width */
+}

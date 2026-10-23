@@ -1,0 +1,301 @@
+/* Import Professional Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap');
+
+/* =========================================
+   1. BASE NAVBAR (Transparent by default)
+   ========================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  
+  /* Fully transparent at the top of the page */
+  background: transparent; 
+  backdrop-filter: blur(0px);
+  transition: all 0.4s ease;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+}
+
+/* =========================================
+   2. SCROLLED STATE (Frosted Glass Effect)
+   ========================================= */
+/* When the user scrolls down, the header becomes visible with a subtle blur */
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border-bottom: 1px solid rgba(153, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   3. LAYOUT CONTAINER
+   ========================================= */
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =========================================
+   4. LOGO STYLING
+   ========================================= */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-img {
+  height: 60px; /* Adjusted from 100px for better navbar proportions */
+  width: auto;
+  object-fit: contain;
+}
+
+/* =========================================
+   5. DESKTOP NAV LINKS
+   ========================================= */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Dynamic text color: White when transparent at top, Dark when scrolled */
+.navbar:not(.scrolled) .nav-links a {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.navbar.scrolled .nav-links a {
+  color: #333333;
+  text-shadow: none;
+}
+
+/* Animated underline on hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #990000;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #990000 !important;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Special "BOOK NOW" Button Style */
+.btn-contact {
+  background-color: #002868 !important;
+  color: #ffffff !important;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  transition: background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.btn-contact::after {
+  display: none !important; /* No underline for the button */
+}
+
+.btn-contact:hover {
+  background-color: #001a44 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 40, 104, 0.2);
+}
+
+/* =========================================
+   6. MOBILE DEFAULTS (Hide mobile elements)
+   ========================================= */
+.hamburger {
+  display: none; 
+}
+
+.mobile-overlay {
+  display: none; 
+}
+
+/* =========================================
+   7. MOBILE RESPONSIVE STYLES
+   ========================================= */
+@media (max-width: 768px) {
+  
+  /* Hide desktop nav links on mobile */
+  .nav-links {
+    display: none;
+  }
+
+  /* Ensure hamburger is visible against transparent background */
+  .navbar:not(.scrolled) .bar {
+    background-color: #ffffff;
+  }
+
+  /* --- HAMBURGER BUTTON --- */
+  .hamburger {
+    display: flex;
+    position: relative;
+    z-index: 1001; /* Stays above the overlay */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bar {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #120f0f;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Hamburger 'X' Animation */
+  .hamburger.open .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .hamburger.open .bar:nth-child(2) { opacity: 0; }
+  .hamburger.open .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+  .hamburger.open .bar { background-color: #ffffff !important; } 
+
+  /* --- FULLSCREEN TRANSPARENT OVERLAY --- */
+  .mobile-overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* TRUE FULL WIDTH */
+    height: 100vh; /* TRUE FULL HEIGHT */
+    
+    /* HIGHLY TRANSPARENT FROSTED GLASS EFFECT */
+    background: rgba(0, 0, 0, 0.65); /* 65% opacity for a premium see-through look */
+    backdrop-filter: blur(16px); 
+    -webkit-backdrop-filter: blur(16px); 
+    
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease; 
+    
+    z-index: 1000; /* Below hamburger (1001), above page content */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* --- CONTENT WRAPPER --- */
+  .overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* --- MENU ITEMS --- */
+  .overlay-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0; 
+  }
+
+  .overlay-menu li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    margin: 1rem 0;
+  }
+
+  /* Staggered fade-in animation for menu items */
+  .mobile-overlay.open .overlay-menu li:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+  .mobile-overlay.open .overlay-menu li:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+  .mobile-overlay.open .overlay-menu li:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+  .mobile-overlay.open .overlay-menu li:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+
+  .overlay-menu a {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .overlay-menu a:hover {
+    color: #38bdf8;
+    transform: scale(1.05);
+  }
+
+  /* --- BRAND NAME (mcvstudios) --- */
+  .mobile-menu-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.85); 
+    letter-spacing: -0.5px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .mobile-overlay.open .mobile-menu-logo {
+    transition-delay: 0.5s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- BOOK NOW Button in Mobile Menu --- */
+  .overlay-menu .book-btn {
+    background: #003366;
+    color: #ffffff !important;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    display: inline-block;
+  }
+
+  .overlay-menu .book-btn:hover {
+    background: #004488;
+    color: #ffffff !important;
+    transform: scale(1.05);
+  }
+}

@@ -1,0 +1,172 @@
+/* =========================================
+   1. SECTION LAYOUT & HEADER
+   ========================================= */
+
+.partners-section {
+  padding: 6rem 0; /* Sets 6rem padding on top/bottom, 0 on left/right */
+  background-color: #ffffff; /* Sets the section background to pure white */
+  width: 100%; /* Makes the section span the full width of the screen */
+  overflow: hidden; /* Hides any overflowing content (crucial for the marquee) */
+}
+
+.partners-header {
+  text-align: center; /* Centers the text horizontally */
+  max-width: 700px; /* Restricts the maximum width of the header text */
+  margin: 0 auto 4rem auto; /* Centers the block and adds 4rem space below it */
+  padding: 0 2rem; /* Adds 2rem horizontal padding for small screens */
+}
+
+.section-badge {
+  display: inline-block; /* Allows it to sit inline but accept block properties */
+  padding: 0.4rem 1rem; /* Adds space inside the badge (top/bottom, left/right) */
+  background: rgba(153, 0, 0, 0.1); /* Light red background with 10% opacity */
+  color: #990000; /* Sets the text color to dark red */
+  font-family: 'Inter', sans-serif; /* Applies the Inter font family */
+  font-weight: 600; /* Makes the text semi-bold */
+  font-size: 0.85rem; /* Sets a relatively small font size */
+  border-radius: 50px; /* Fully rounds the corners to make a pill shape */
+  margin-bottom: 1rem; /* Adds space below the badge before the h2 */
+  text-transform: uppercase; /* Forces all text to be uppercase */
+  letter-spacing: 1px; /* Adds slight spacing between letters for readability */
+}
+
+.partners-header h2 {
+  font-family: 'Montserrat', sans-serif; /* Applies the Montserrat font family */
+  font-size: 2.8rem; /* Sets a large, prominent font size */
+  font-weight: 800; /* Makes the heading extra bold */
+  color: #002868; /* Sets the text color to dark navy blue */
+  margin: 0 0 1rem 0; /* Removes top margin, adds 1rem space below */
+}
+
+.partners-header p {
+  font-family: 'Inter', sans-serif; /* Applies the Inter font family */
+  font-size: 1.1rem; /* Sets a comfortable, readable paragraph size */
+  color: #555555; /* Sets the text color to a medium-dark gray */
+  margin: 0; /* Removes default paragraph margins */
+}
+
+/* =========================================
+   2. MARQUEE CONTAINER & FADE EDGES
+   ========================================= */
+
+.marquee-container {
+  position: relative; /* Establishes a positioning context for the pseudo-elements */
+  width: 100%; /* Spans the full width of its parent */
+  overflow: hidden; /* Ensures the scrolling track doesn't break the layout */
+}
+
+.marquee-container::before {
+  content: ''; /* Required to render the pseudo-element */
+  position: absolute; /* Positions it relative to the .marquee-container */
+  top: 0; /* Aligns to the top edge */
+  left: 0; /* Aligns to the left edge */
+  width: 150px; /* Sets the width of the fade effect */
+  height: 100%; /* Makes it span the full height of the container */
+  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0) 100%); /* Fades from solid white to transparent */
+  z-index: 2; /* Ensures the fade sits on top of the scrolling logos */
+  pointer-events: none; /* Allows mouse clicks to pass through to the logos */
+}
+
+.marquee-container::after {
+  content: ''; /* Required to render the pseudo-element */
+  position: absolute; /* Positions it relative to the .marquee-container */
+  top: 0; /* Aligns to the top edge */
+  right: 0; /* Aligns to the right edge */
+  width: 150px; /* Sets the width of the fade effect */
+  height: 100%; /* Makes it span the full height of the container */
+  background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0) 100%); /* Fades from solid white to transparent (right to left) */
+  z-index: 2; /* Ensures the fade sits on top of the scrolling logos */
+  pointer-events: none; /* Allows mouse clicks to pass through to the logos */
+}
+
+/* =========================================
+   3. SCROLLING TRACK & ANIMATION
+   ========================================= */
+
+.marquee-track {
+  display: flex; /* Arranges the logos in a horizontal row */
+  gap: 4rem; /* Adds 4rem of space between each logo */
+  width: max-content; /* Makes the track exactly as wide as its contents */
+  animation: scrollLeft 35s linear infinite; /* Applies the scrolling animation (35s duration, constant speed, loops forever) */
+}
+
+.marquee-track:hover {
+  animation-play-state: paused; /* Stops the animation when the user hovers over the track */
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); } /* Starts at the original position */
+  100% { transform: translateX(-50%); } /* Moves left by 50% (creates the seamless loop effect) */
+}
+
+/* =========================================
+   4. LOGO CONTAINER & IMAGE STYLING
+   ========================================= */
+
+.partner-logo {
+  display: flex; /* Uses flexbox to center the image inside */
+  align-items: center; /* Centers the image vertically */
+  justify-content: center; /* Centers the image horizontally */
+  min-width: 180px; /* Sets a minimum width to keep the marquee spacing consistent */
+  height: 80px; /* Sets a fixed height for uniform alignment */
+  cursor: pointer; /* Changes the mouse cursor to a hand on hover */
+  transition: transform 0.3s ease; /* Smooths out the hover scaling effect over 0.3 seconds */
+  /* Note: Background, border, border-radius, and padding removed for a "free" floating look */
+}
+
+.logo-image {
+  max-width: 100%; /* Prevents the image from exceeding the container's width */
+  max-height: 100%; /* Prevents the image from exceeding the container's height */
+  width: auto; /* Allows the width to scale naturally */
+  height: auto; /* Allows the height to scale naturally */
+  object-fit: contain; /* Ensures the logo scales perfectly without stretching or cropping */
+  display: block; /* Removes default inline image spacing */
+  
+  filter: grayscale(100%); /* Strips all color, making the logo black and white */
+  opacity: 0.6; /* Makes the logo slightly transparent for a muted look */
+  transition: all 0.3s ease; /* Smooths out the color and opacity changes on hover */
+}
+
+.partner-logo:hover {
+  transform: scale(1.05); /* Slightly enlarges the logo container on hover */
+  /* Note: Box-shadow and border-color removed to keep the floating effect clean */
+}
+
+.partner-logo:hover .logo-image {
+  filter: grayscale(0%); /* Removes the grayscale filter, restoring original colors */
+  opacity: 1; /* Makes the logo fully opaque and solid */
+}
+
+/* =========================================
+   5. RESPONSIVE DESIGN
+   ========================================= */
+
+/* Styles for extra large screens (Desktops > 1400px) */
+@media (min-width: 1400px) {
+  .partners-header h2 { font-size: 3.2rem; } /* Increases heading size for large screens */
+  .marquee-track { gap: 6rem; } /* Increases space between logos */
+  .partner-logo { min-width: 220px; height: 100px; } /* Increases logo container size */
+}
+
+/* Styles for medium screens (Tablets & small laptops < 1024px) */
+@media (max-width: 1024px) {
+  .partners-header h2 { font-size: 2.4rem; } /* Decreases heading size slightly */
+  .marquee-track { gap: 3rem; } /* Decreases space between logos */
+}
+
+/* Styles for small screens (Tablets & large phones < 768px) */
+@media (max-width: 768px) {
+  .partners-section { padding: 4rem 0; } /* Reduces section top/bottom padding */
+  .partners-header h2 { font-size: 2rem; } /* Further decreases heading size */
+  .marquee-track { gap: 2rem; animation-duration: 25s; } /* Reduces gap and speeds up animation slightly */
+  .partner-logo { min-width: 140px; height: 60px; } /* Shrinks the logo containers */
+  .marquee-container::before,
+  .marquee-container::after { width: 60px; } /* Shrinks the fade effect width to match smaller screens */
+}
+
+/* Styles for extra small screens (Phones < 480px) */
+@media (max-width: 480px) {
+  .partners-header h2 { font-size: 1.6rem; } /* Sets the smallest heading size */
+  .marquee-track { gap: 1.5rem; } /* Minimizes space between logos */
+  .partner-logo { min-width: 120px; height: 50px; } /* Sets the smallest logo container size */
+}

@@ -1,0 +1,188 @@
+/* =========================================
+   1. FOOTER BASE LAYOUT
+   ========================================= */
+
+.footer-section {
+  background-color: #002868; /* Corporate Blue */
+  color: #ffffff;
+  padding: 4rem 2rem 2rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap; /* Allows stacking on smaller screens */
+}
+
+/* =========================================
+   2. BRAND & DESCRIPTION
+   ========================================= */
+
+.footer-brand {
+  flex: 1;
+  min-width: 280px;
+}
+
+.footer-brand h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.5px;
+}
+
+.footer-brand p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent white for hierarchy */
+  max-width: 400px;
+  margin: 0;
+}
+
+/* =========================================
+   3. SOCIAL MEDIA & ANIMATIONS
+   ========================================= */
+
+.footer-socials {
+  text-align: right;
+  min-width: 280px;
+}
+
+.footer-socials h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: #ffffff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* Makes it a perfect circle */
+  background-color: rgba(255, 255, 255, 0.1); /* Faint white background */
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth, premium easing */
+}
+
+.social-link svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+
+/* HOVER ANIMATION: Lifts up, changes color to Brand Red, and icon scales */
+.social-link:hover {
+  background-color: #990000; /* Brand Red */
+  color: #ffffff;
+  transform: translateY(-5px); /* Lifts the circle up */
+  box-shadow: 0 8px 20px rgba(153, 0, 0, 0.4); /* Red glow shadow */
+}
+
+.social-link:hover svg {
+  transform: scale(1.1); /* Icon grows slightly */
+}
+
+/* =========================================
+   4. COPYRIGHT & BOTTOM BAR
+   ========================================= */
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 3rem auto 0 auto;
+  text-align: center;
+}
+
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  margin-bottom: 1.5rem;
+}
+
+.footer-bottom p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+/* =========================================
+   5. ENTRANCE ANIMATIONS
+   ========================================= */
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: footerFadeUp 0.8s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+@keyframes footerFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   6. MOBILE RESPONSIVENESS
+   ========================================= */
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .footer-brand {
+    text-align: center;
+  }
+
+  .footer-brand p {
+    margin: 0 auto; /* Centers the paragraph */
+  }
+
+  .footer-socials {
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center; /* Centers the icons on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-section {
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.5rem;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+  }
+}

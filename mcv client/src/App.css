@@ -1,0 +1,135 @@
+/* =========================================
+   1. GLOBAL APP LAYOUT & RESETS
+   ========================================= */
+
+body, html {
+  margin: 0; /* Removes the browser's default 8px white border around the page */
+  padding: 0; /* Removes any default inner spacing */
+  width: 100%; /* Forces the body to take up the full width of the screen */
+  overflow-x: hidden; /* Prevents a horizontal scrollbar if content gets too wide */
+}
+
+.app-container {
+  min-height: 100vh; /* Makes the container at least as tall as the full screen (100% Viewport Height) */
+  display: flex; /* Uses Flexbox to manage the layout of children (Header, Main, Footer) */
+  flex-direction: column; /* Stacks the Header, Main, and Footer vertically */
+  background-color: #F8F9FA; /* Sets the overall page background to a clean off-white */
+  color: #333333; /* Sets the default text color to dark gray */
+  width: 100%; /* Ensures the container spans the full screen width */
+}
+
+main {
+  flex: 1; /* Makes this section grow to fill any empty vertical space (pushes footer down) */
+  padding-top: 0; /* Removes top padding so the Hero section can sit flush at the top */
+  width: 100%; /* Ensures the main area takes up full width */
+}
+
+/* =========================================
+   2. FEATURES SECTION (The Cards)
+   ========================================= */
+
+.features-section {
+  display: grid; /* Uses CSS Grid to arrange the cards */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Creates responsive columns that are at least 300px wide and fit as many as possible per row */
+  gap: 2rem; /* Adds 2rem of space between each card */
+  max-width: 1200px; /* Prevents the section from getting too wide on huge monitors */
+  margin: 0 auto; /* Centers the section horizontally on the page */
+  padding: 4rem 2rem 6rem 2rem; /* Adds space inside the section (top, right, bottom, left) */
+  width: 100%; /* Ensures it uses full available width up to the max-width */
+  box-sizing: border-box; /* Includes padding in the total width calculation so it doesn't overflow */
+}
+
+.feature-card {
+  background: #ffffff; /* Sets the card background to pure white */
+  padding: 2.5rem; /* Adds space inside the card around the text/icon */
+  border-radius: 12px; /* Rounds the corners of the card */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Adds a very faint, subtle border */
+  text-align: center; /* Centers the text and icon inside the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooths out the hover animation effects */
+}
+
+.feature-card:hover {
+  transform: translateY(-5px); /* Moves the card up by 5 pixels when hovered */
+  box-shadow: 0 10px 30px rgba(0, 40, 104, 0.08); /* Adds a soft blue drop shadow to make it look lifted */
+  border-color: rgba(0, 68, 204, 0.2); /* Changes the border to a faint blue on hover */
+}
+
+.card-icon {
+  font-size: 2.5rem; /* Makes the emoji/icon large */
+  margin-bottom: 1.5rem; /* Adds space below the icon */
+}
+
+.feature-card h3 {
+  font-family: 'Montserrat', sans-serif; /* Uses the bold, professional Montserrat font for the title */
+  font-size: 1.5rem; /* Sets the title size */
+  color: #002868; /* Colors the title corporate blue */
+  margin-bottom: 1rem; /* Adds space below the title */
+}
+
+.feature-card p {
+  font-family: 'Inter', sans-serif; /* Uses the clean, readable Inter font for the description */
+  color: #555555; /* Colors the text medium gray */
+  line-height: 1.6; /* Adds comfortable spacing between lines of text */
+  font-size: 1rem; /* Sets the standard text size */
+}
+
+/* =========================================
+   3. FOOTER
+   ========================================= */
+
+.footer {
+  background-color: #002868; /* Sets the footer background to corporate blue */
+  color: #ffffff; /* Sets the footer text color to white */
+  text-align: center; /* Centers the copyright text */
+  padding: 2rem; /* Adds space inside the footer */
+  font-family: 'Inter', sans-serif; /* Uses the Inter font */
+  font-size: 0.9rem; /* Makes the text slightly smaller */
+  margin-top: auto; /* Pushes the footer to the very bottom if the page content is short */
+  width: 100%; /* Ensures the footer spans the full width */
+}
+
+/* =========================================
+   4. TAB CONTENT & ANIMATIONS
+   ========================================= */
+
+.tab-content-section {
+  max-width: 100%; /* Allows it to use full width */
+  margin: 0 auto; /* Centers it */
+  padding: 2rem; /* Adds inner spacing */
+  min-height: 400px; /* Gives it a minimum height so the page doesn't jump when tabs change */
+  display: flex; /* Uses flexbox */
+  justify-content: center; /* Centers the content horizontally */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out forwards; /* Runs the 'fadeIn' keyframes over 0.4 seconds */
+}
+
+@keyframes fadeIn {
+  from { /* Starting state of the animation */
+    opacity: 0; /* Starts completely invisible */
+    transform: translateY(15px); /* Starts shifted down by 15 pixels */
+  }
+  to { /* Ending state of the animation */
+    opacity: 1; /* Ends fully visible */
+    transform: translateY(0); /* Ends in its normal position */
+  }
+}
+
+/* =========================================
+   5. MOBILE RESPONSIVENESS
+   ========================================= */
+
+@media (max-width: 768px) {
+  /* Applies these styles only on screens smaller than 768px (tablets/phones) */
+  
+  .features-section {
+    padding: 3rem 1rem 4rem 1rem; /* Reduces the side padding so it fits on small screens */
+  }
+
+  .feature-card {
+    padding: 2rem 1.5rem; /* Reduces the inner padding of the cards on mobile */
+  }
+}
